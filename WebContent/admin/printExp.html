@@ -2,12 +2,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>诗轩-后台</title>
+<title>打印快递单</title>
 <link rel="stylesheet" type="text/css" href="css/admin.css">
 <script type="text/javascript" src="../js/jquery.js"></script>
 <script type="text/javascript" src="../js/main.js"></script>
 </head>
 <body>
+<p style="font-size:18px;text-align:left; font-weight:bold; text-indent: 100px;">快递单</p>
 <style>
 td{padding: 10px;}
 </style>
@@ -28,14 +29,13 @@ td{padding: 10px;}
 <div style="margin: 30px;">
 <table>
 <tr height="50" align="center" valign="middle">
-<td width="100"><a id="print_invoice" class="ui-btn" href="/Selisse/admin/printInv.html" target="_blank">打印配货单</a></td>
-<td width="100"><a id="print_express" class="ui-btn" href="/Selisse/admin/printExp.html" target="_blank">打印快递单</a></td>
+<td width="100"><a id="print_express" class="ui-btn">打印快递单</a></td>
 </tr>
-<tr height="50" align="center" valign="middle">
-<td width="100"><a id="delete_order" class="ui-btn">删除订单</a></td>
-<td width="100"><a id="confirm_send" class="ui-btn">确定发货</a></td>
-</tr>
+
 </table>
+
+
+
 </div>
 <script type="text/javascript">
 	var isAdmin = false;
@@ -93,35 +93,18 @@ td{padding: 10px;}
 		}
 	});
 	
-	$("#confirm_send").click(function(){
-		var expressNo = $("#express_no input").val();
-		var charges = $("#charges input").val();
-		var status = $("#status input").get(0).checked ? 0 : 1;
-		$.ajax({
-			url: "/Selisse/updateOrder",
-			type: "post",
-			data: {
-				orderID: getPara("orderID"),
-				expressNo: expressNo,
-				charges: charge,
-				status: status
-			},
-			success: function(data){
-				if(data == "000000"){
-					if(charges > 0){
-						Common.updateBalance(localStorage.getItem("userBalance") - charges,function(){
-							alert("更新订单成功，快递费已从代理余额中扣除！");
-						},function(){
-							alert("扣除快递费失败！");
-						});
-					}
-				}else{
-					alert("更新失败！");
-				}
-			}
-		});
+	
+	$("#print_express").click(function(){
+		if(confirm("确定打印？")){
+			// 开始打印
+			window.print();
+		}else{
+			// 不打印
+		}
+		
+		
 	});
 	
-</script>
+	</script>
 </body>
 </html>
