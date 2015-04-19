@@ -31,7 +31,7 @@
 	<a class="ui-btn">确认并结算</a>
 </div>
 <script type="text/javascript">
-	var exprArr = ['申通','中通','顺丰','EMS','圆通','韵达','百世汇通','宅急送','天天','德邦物流','新邦物流','天地华宇'];
+	var exprArr = ['申通','中通','顺丰','EMS','圆通','韵达','百世汇通','宅急送','天天','德邦物流','新邦物流','天地华宇','其他'];
 	for(var index=0;index<exprArr.length;index++){
 		$("#express_choose").append("<option value='"+index+"'>"+exprArr[index]+"</option>");
 	}
@@ -145,6 +145,10 @@
 		
 		if(confirm("点击确认将生成订单详情，确认后将不可编辑，只可删除订单，请再次确认")){
 			// 小样和物料总额不能超过正装订单金额的5%
+			if(totalPrice==0){
+				alert("您还未选择商品！");
+				return;
+			}
 			if((xiaoyangTotalPrice+wuliaoTotalPrice) > totalPrice * 0.05){
 				alert("小样和物料总额不能超过正装订单金额的5%");
 				return;
@@ -171,6 +175,7 @@
 							alert("结算成功，可在订单查询里查询，稍后跟单会为您发货！");
 							// 更新余额
 							Common.updateBalance(localStorage.getItem("userBalance") - totalPrice);
+							window.location.href = "/Selisse/admin/agent/orderSuccess.html"; 
 						}else{
 							alert("结算失败，请联系小明！");
 						}
