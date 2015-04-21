@@ -6,6 +6,9 @@
 <link rel="stylesheet" type="text/css" href="css/admin.css">
 <script type="text/javascript" src="../js/jquery.js"></script>
 <script type="text/javascript" src="../js/main.js"></script>
+<style media="print" type="text/css"> 
+.noprint{visibility:hidden} 
+</style>
 </head>
 <body>
 <style>
@@ -26,10 +29,10 @@ td{padding: 10px;}
 	
 </table>
 <div style="margin: 30px;">
-<table>
+<table class = "noprint">
 <tr height="50" align="center" valign="middle">
-<td width="100"><a id="print_invoice" class="ui-btn" href="/Selisse/admin/printInv.html" target="_blank">打印配货单</a></td>
-<td width="100"><a id="print_express" class="ui-btn" href="/Selisse/admin/printExp.html" target="_blank">打印快递单</a></td>
+<td width="100"><a id="print_invoice" class="ui-btn" href="javascript:window.print()" target="_blank">打印配货单</a></td>
+<td width="100"><a id="print_express" class="ui-btn" href="javascript:window.print()" target="_blank">打印快递单</a></td>
 </tr>
 <tr height="50" align="center" valign="middle">
 <td width="100"><a id="delete_order" class="ui-btn">删除订单</a></td>
